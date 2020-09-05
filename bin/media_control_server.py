@@ -3,7 +3,6 @@ import pyautogui
 import qrcode
 import socket
 from matplotlib import pyplot as plt
-from threading import Thread
 
 app = Flask(__name__)
 
