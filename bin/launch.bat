@@ -1,1 +1,0 @@
-cmd /k "cd ../Scripts & activate & cd ../bin & python media_control_server.py"
