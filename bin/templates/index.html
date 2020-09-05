@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang='es-ES'>
+    <head>
+        <title>Media Remote Control</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--Bootstrap, jQuery, popper-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='cdn/bootstrap.min.css') }}">
+        <script src="{{ url_for('static', filename='cdn/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='cdn/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='cdn/bootstrap.min.js') }}"></script>
+        <!--FontAwesome-->
+        <link href="//db.onlinewebfonts.com/c/3b19cb4818cacb8c8a21515464fc1167?family=Font+Awesome+5" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='cdn/fontawesome.all.min.css') }}">
+        <script src="{{ url_for('static', filename='cdn/fontawesome.all.min.js') }}"></script>
+        <script>
+            function playpause() {
+                $.ajax({
+                    url: '/pause',
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function(html) {
+                        //pass
+                    }
+                });
+            }
+
+            $(document).ready(function(){
+                $('#mute').click(function(){
+                    /*if (this.classList.contains('btn-outline-danger')) {
+                        $(this).removeClass('btn-outline-danger').addClass('btn-danger');
+                    } else {
+                        $(this).removeClass('btn-danger').addClass('btn-outline-danger');
+                    }*/
+                    $.ajax({
+                        url: '/mute',
+                        type: 'GET',
+                        dataType: 'html',
+                        success: function(hmtl) {
+                            //pass
+                        }
+                    });
+                });
+                $('#backward').click(function(){
+                    $.ajax({
+                        url: '/backward',
+                        type: 'GET',
+                        dataType: 'html',
+                        success: function(html) {
+                            //pass
+                        }
+                    });
+                });
+                $('#forward').click(function(){
+                    $.ajax({
+                        url: '/forward',
+                        type: 'GET',
+                        dataType: 'html',
+                        success: function(html) {
+                            //pass
+                        }
+                    });
+                });
+                $('#pause').click(function(){
+                    $(this).css('display','none');
+                    $('#play').css('display', 'inline-block');
+                    playpause();
+                });
+                $('#play').click(function(){
+                    $(this).css('display','none');
+                    $('#pause').css('display','inline-block');
+                    playpause();
+                });
+            });
+        </script>
+        <style>
+            button {
+                width: 80px;
+                height: 80px;
+            }
+            #play {
+                display: none;
+            }
+            /* The switch - the box around the slider */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+                margin-bottom: 0;
+            }
+
+            /* Hide default HTML checkbox */
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            /* The slider */
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #d9534f;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #d9534f;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+            .flex {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='jumbotron'>
+            <h1>Media Remote Control</h1>
+            <h4><small>Control remoto del reproductor de medios de Windows</small></h4>
+        </div>
+        <div class='flex'>
+            <!--<button id='mute' type='button' class='btn btn-outline-danger'>
+                <span class='fa fa-volume-mute fa-2x'></span>
+            </button>-->
+            <span class='fa fa-volume-mute fa-2x mr-3' style='line-height: 50px'></span>
+            <label class="switch">
+                <input id='mute' type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="mt-2" style="text-align: center;">
+            <button id='backward' type='button' class='btn btn-outline-primary'>
+                <span class='fa fa-backward fa-2x'></span>
+            </button>
+            <button id='pause' type='button' class='btn btn-outline-primary'>
+                <span class='fa fa-pause fa-2x'></span>
+            </button>
+            <button id='play' type='button' class='btn btn-outline-primary'>
+                <span class='fa fa-play fa-2x'></span>
+            </button>
+            <button id='forward' type='button' class='btn btn-outline-primary'>
+               <span class='fa fa-forward fa-2x'></span>
+            </button>
+        </div>
+    </body>
+</html>
